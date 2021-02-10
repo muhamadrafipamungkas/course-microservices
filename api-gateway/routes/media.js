@@ -4,6 +4,9 @@ const {APP_NAME} = process.env;
 
 const mediaHandler = require('./handler/media')
 
+/* GET media listing. */
+router.get('/', mediaHandler.getAll)
+
 /* POST media listing. */
 router.post('/', mediaHandler.create);
 
