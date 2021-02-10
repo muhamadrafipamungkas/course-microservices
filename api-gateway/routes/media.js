@@ -10,4 +10,7 @@ router.get('/', mediaHandler.getAll)
 /* POST media listing. */
 router.post('/', mediaHandler.create);
 
+/* DELETE media listing. */
+router.delete('/:id', mediaHandler.destroy);
+
 module.exports = router;
