@@ -70,7 +70,7 @@ router.delete('/:id', async (req, res) => {
 		return res.status(404).json({status: 'error', message: 'media not found'});
 	}
 
-	fs.unlink('./public/${media.image}', async (err) => {
+	fs.unlink(`./public/${media.image}`, async (err) => {
 		if (err) {
 			return res.status(400).json({ status: 'error', message: err.message});
 		}
