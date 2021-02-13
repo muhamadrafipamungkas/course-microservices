@@ -1,4 +1,3 @@
-const { DataTypes } = require("sequelize/types");
 const { sequelize } = require(".");
 
 module.exports = (sequelize, DataTypes) => {
@@ -24,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         role: {
             type: DataTypes.ENUM,
-            values: ['admin','student']
+            values: ['admin','student'],
             allowNull: false,
             defaultValue: 'student'
         },
@@ -45,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE
         }
     }, {
-        table: 'users',
+        tableName: 'users',
         timestamp: true
     })
 

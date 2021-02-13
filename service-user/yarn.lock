@@ -424,6 +424,11 @@ ext@^1.1.2:
   dependencies:
     type "^2.0.0"
 
+fastest-validator@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/fastest-validator/-/fastest-validator-1.10.0.tgz#8455306fdd573cf50c12e18fdf240ab8306ffb76"
+  integrity sha512-qNspEkJiwD2OHRrZukvAIxBQkOJjFTdlQ2NYNn2Gv4hudhYL37MTqe5hsdM3hrYonZGzbZADSddcMhYN1slBuA==
+
 finalhandler@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.1.tgz#eebf4ed840079c83f4249038c9d703008301b105"
