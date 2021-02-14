@@ -7,4 +7,7 @@ const userHandler = require('./handler/users')
 router.post('/register', userHandler.register);
 router.post('/login', userHandler.login);
 
+/* PUT users listing. */
+router.put('/update', userHandler.update);
+
 module.exports = router;
