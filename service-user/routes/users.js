@@ -5,6 +5,7 @@ const userHandler = require('./handler/users')
 
 /* GET users listing. */
 router.get('/:id', userHandler.getUser)
+router.get('/', userHandler.getUsers)
 
 /* POST users listing. */
 router.post('/register', userHandler.register);
