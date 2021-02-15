@@ -13,6 +13,6 @@ router.post('/login', userHandler.login);
 router.post('/logout', userHandler.logout);
 
 /* PUT users listing. */
-router.put('/update', userHandler.update);
+router.put('/:id', userHandler.update);
 
 module.exports = router;

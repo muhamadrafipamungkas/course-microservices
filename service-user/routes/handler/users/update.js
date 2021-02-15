@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         })
     }
 
-    const id = req.body.id
+    const id = req.params.id
     const user = await User.findByPk(id)
 
     if (!user) {
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
         if (checkEmail && email !== user.email) {
             return res.status(409).json({
                 status: 'error',
-                message: 'email already exist'
+                message: 'email already exist',
             })
         }
     }
