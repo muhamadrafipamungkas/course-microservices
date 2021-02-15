@@ -4,8 +4,10 @@ const {APP_NAME} = process.env;
 
 const mediaHandler = require('./handler/media')
 
+const verifyToken = require('./../middlewares/verifyToken')
+
 /* GET media listing. */
-router.get('/', mediaHandler.getAll)
+router.get('/', verifyToken, mediaHandler.getAll)
 
 /* POST media listing. */
 router.post('/', mediaHandler.create);
