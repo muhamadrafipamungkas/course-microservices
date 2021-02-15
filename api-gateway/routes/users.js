@@ -7,6 +7,7 @@ const verifyToken = require('./../middlewares/verifyToken')
 /* POST users listing. */
 router.post('/register', userHandler.register);
 router.post('/login', userHandler.login);
+router.post('/logout', verifyToken, userHandler.logout);
 
 /* PUT users listing. */
 router.put('/', verifyToken, userHandler.update);
