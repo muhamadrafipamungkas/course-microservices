@@ -19,7 +19,7 @@ class Course extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function mentor(): BelongsTo
+    public function mentor()
     {
         return $this->belongsTo(Mentor::class);
     }
@@ -29,7 +29,7 @@ class Course extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function chapters(): HasMany
+    public function chapters()
     {
         return $this->hasMany(Chapter::class)->orderBy('id', 'ASC');
     }
@@ -39,7 +39,7 @@ class Course extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function iamges(): HasMany
+    public function iamges()
     {
         return $this->hasMany(ImageCourse::class)->orderBy('id', 'ASC');
     }

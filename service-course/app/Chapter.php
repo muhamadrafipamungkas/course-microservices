@@ -18,7 +18,7 @@ class Chapter extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lesson(): HasMany
+    public function lesson()
     {
         return $this->hasMany(Lesson::class)->orderBy('id', 'ASC');
     }
