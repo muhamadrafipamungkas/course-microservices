@@ -27,6 +27,21 @@ class ChapterController extends Controller
         ], 200);
     }
 
+    public function show($id) {
+        $chapter = Chapter::find($id);
+        if (!$chapter) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'chapter not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $chapter
+        ], 200);
+    }
+
     public function create(Request $request) {
         $rules = [
             'name' => 'required|string',
@@ -103,6 +118,23 @@ class ChapterController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => $chapter
+        ], 200);
+    }
+
+    public function destroy($id) {
+        $chapter = Chapter::find($id);
+        if (!$chapter) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'chapter not found'
+            ], 404);
+        }
+
+        $chapter->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'chapter deleted'
         ], 200);
     }
 }
