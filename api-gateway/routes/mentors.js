@@ -13,6 +13,9 @@ router.get('/:id', mentorsHandler.get)
 router.post('/', mentorsHandler.create)
 
 /* PUT media listing. */
+router.put('/:id', mentorsHandler.update)
+
 /* DELETE media listing. */
+router.delete('/:id', mentorsHandler.destroy)
 
 module.exports = router;
