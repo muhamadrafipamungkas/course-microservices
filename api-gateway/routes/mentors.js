@@ -7,5 +7,12 @@ const verifyToken = require('./../middlewares/verifyToken')
 
 /* GET media listing. */
 router.get('/', mentorsHandler.getAll)
+router.get('/:id', mentorsHandler.get)
+
+/* POST media listing. */
+router.post('/', mentorsHandler.create)
+
+/* PUT media listing. */
+/* DELETE media listing. */
 
 module.exports = router;
