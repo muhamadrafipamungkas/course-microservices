@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Course;
 use App\Mentor;
+use App\MyCourse;
+use App\Review;
 
 class CourseController extends Controller
 {
@@ -29,6 +31,27 @@ class CourseController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => $courses->paginate(10)
+        ], 200);
+    }
+
+    public function show($id) {
+        $course = Course::find($id);
+        if(!$course) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'course not found'
+            ], 404);
+        }
+
+        $reviews = Review::where('course_id', $id)->get()->toArray();
+        $totalStudent = MyCourse::where('course_id', $id)->count();
+
+        $course['reviews'] = $reviews;
+        $course['total_student'] = $totalStudent;
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $course
         ], 200);
     }
 
