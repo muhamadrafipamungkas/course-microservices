@@ -33,8 +33,12 @@ Route::post('chapters', 'ChapterController@create');
 Route::put('chapters/{id}', 'ChapterController@update');
 Route::delete('chapters/{id}', 'ChapterController@destroy');
 
+
 Route::get('lessons', 'LessonController@index');
 Route::get('lessons/{id}', 'LessonController@show');
 Route::post('lessons', 'LessonController@create');
 Route::put('lessons/{id}', 'LessonController@update');
 Route::delete('lessons/{id}', 'LessonController@destroy');
+
+
+Route::post('image-courses', 'ImageCourseController@create');
