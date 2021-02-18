@@ -44,7 +44,7 @@ class Course extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function iamges()
+    public function images()
     {
         return $this->hasMany(ImageCourse::class)->orderBy('id', 'ASC');
     }
