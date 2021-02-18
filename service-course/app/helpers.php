@@ -23,7 +23,7 @@ function getUserByIds($userIds = []) {
     $url = env('SERVICE_USER_URL')."users/";
 
     try {
-        if (count($userIds === 0)) {
+        if (count($userIds) === 0) {
             return [
                 'status' => 'success',
                 'http_code' => 200,
