@@ -10,6 +10,20 @@ use App\Order;
 
 class OrderController extends Controller
 {
+    public function index(Request $request) {
+        $userId = $request->input('user_id');
+        $orders = Order::query();
+
+        $orders->when($userId, function($query) use($userId) {
+            return $query->where('user_id', $userId);
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $orders->get()
+        ], 200);
+    }
+
     public function create(Request $request) {
         $user = $request->input('user');
         $course = $request->input('course');
