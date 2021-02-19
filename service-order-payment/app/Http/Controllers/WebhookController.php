@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Order;
+use App\PaymentLog;
+
 class WebhookController extends Controller
 {
     //
@@ -23,13 +26,60 @@ class WebhookController extends Controller
         $type = $data['payment_type'];
         $fraudStatus = $data['fraud_status'];
 
-        if ($signature !== $mySignatureKey) {
+        if ($signatureKey !== $mySignatureKey) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'invalid signature'
+                'message' => 'invalid signature',
+                'signature' => $mySignatureKey,
+                'signature_key' => $orderId.$statusCode.$grossAmount.$serverKey
             ], 400);
         }
 
-        return true;
+        $realOrderId = explode('-', $orderId);
+        $order = Order::find($realOrderId[0]);
+
+        if (!$order) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'order id not found'
+            ], 404);
+        }
+
+        if (!$order->status === 'success') {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'operation not permitted'
+            ], 405);
+        }
+
+        if ($transactionStatus == 'capture') {
+            if ($fraudStatus == 'challange') {
+                $order->status = 'challange';
+            } else if ($fraudStatus == 'accept') {
+                $order->status = 'success';
+            }
+        } else if ($transactionStatus == 'settlement') {
+            $order->status = 'success';
+        } else if ($transactionStatus == 'cancel' || $transactionStatus == 'deny' || $transactionStatus == 'expire' ) {
+            $order->status = 'failure';
+        } else if ($transactionStatus == 'pending') {
+            $order->status = 'pending';
+        }
+
+        $logData = [
+            'status' => $transactionStatus,
+            'raw_response' => json_encode($data),
+            'order_id' => $realOrderId[0],
+            'payment_type' => $type
+        ];
+
+        PaymentLog::create($logData);
+        $order->save();
+
+        if ($order->status === 'success') {
+
+        }
+
+        return response()->json('ok');
     }
 }
