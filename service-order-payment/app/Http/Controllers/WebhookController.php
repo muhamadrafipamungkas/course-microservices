@@ -30,8 +30,8 @@ class WebhookController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'invalid signature',
-                'signature' => $mySignatureKey,
-                'signature_key' => $orderId.$statusCode.$grossAmount.$serverKey
+                // 'signature' => $mySignatureKey,
+                // 'signature_key' => $orderId.$statusCode.$grossAmount.$serverKey
             ], 400);
         }
 
@@ -45,7 +45,7 @@ class WebhookController extends Controller
             ], 404);
         }
 
-        if (!$order->status === 'success') {
+        if ($order->status === 'success') {
             return response()->json([
                 'status' => 'error',
                 'message' => 'operation not permitted'
@@ -73,6 +73,11 @@ class WebhookController extends Controller
             'payment_type' => $type
         ];
 
+        // return response()->json([
+        //     'order' => $order->status,
+        //     'check' => ($order->status === 'success')
+        // ]);
+
         PaymentLog::create($logData);
         $order->save();
 
@@ -80,6 +85,11 @@ class WebhookController extends Controller
             createPremiumAccess([
                 'user_id' => $order->user_id,
                 'course_id' => $order->course_id
+            ]);
+        } else {
+            return response()->json([
+                'order' => $order->status,
+                'check' => ($order->status === 'success')
             ]);
         }
 

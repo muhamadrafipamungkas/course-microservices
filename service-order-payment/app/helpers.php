@@ -9,9 +9,10 @@ function createPremiumAccess($data) {
         $response = Http::post($url, $data);
         $data = $response->json();
         $data['http_code'] = $response->getStatusCode();
-
+        Log::info($data);
         return $data;
     } catch (\Throwable $th) {
+        Log::error($th);
         return [
             'status' => 'error',
             'http_code' => 500,
